@@ -15,3 +15,16 @@ def create_student(name, age):
     db.commit()
 
     db.close()
+  def get_students():
+    db = SessionLocal()
+
+    students = db.query(Student).all()
+
+    for student in students:
+        print(
+            student.id,
+            student.name,
+            student.age
+        )
+
+    db.close()
