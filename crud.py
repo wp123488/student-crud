@@ -15,6 +15,7 @@ def create_student(name, age):
     db.commit()
 
     db.close()
+
   def get_students():
     db = SessionLocal()
 
@@ -28,6 +29,7 @@ def create_student(name, age):
         )
 
     db.close()
+
   def update_student(student_id, name):
     db = SessionLocal()
 
@@ -39,6 +41,21 @@ def create_student(name, age):
 
     if student:
         student.name = name
+        db.commit()
+
+    db.close()
+
+  def delete_student(student_id):
+    db = SessionLocal()
+
+    student = (
+        db.query(Student)
+        .filter(Student.id == student_id)
+        .first()
+    )
+
+    if student:
+        db.delete(student)
         db.commit()
 
     db.close()
